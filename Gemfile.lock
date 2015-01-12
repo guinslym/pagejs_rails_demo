@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/guinslym/pagejs_rails.git
+  revision: b758d046f72f29a3cd5f0b4e7be36fb7a9b83db6
+  specs:
+    pagejs_rails (0.0.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -116,6 +122,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   jbuilder (~> 2.0)
   jquery-rails
+  pagejs_rails!
   rails (= 4.1.5)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
