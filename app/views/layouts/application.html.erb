@@ -3,6 +3,8 @@
 <head>
 	<meta charset="utf-8">
   <title>RailsPagejsDemo</title>
+  <%= stylesheet_link_tag    'welcome', media: 'all', 'data-turbolinks-track' => true %>
+  <!-- using CDN instead of gems -->
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
   <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
@@ -17,9 +19,12 @@
 <%= yield %>
 
 </body>
+
 <script type="text/javascript">
 /*
-Each link (or routes) will be catch by pages.js 
+Each link (or routes) will be catch by pages.js
+Than you do what you want with it 
+
 
 */
 page('/', function(ctx){
@@ -28,9 +33,12 @@ page('/', function(ctx){
           $('section#articles').empty();
           $('section#images').empty();
 });
+//or with functions and callback
+//I'm using handlebar to display the result
 page('/images', loadImages, displayImages);
 page('/articles', loadArticles, displayArticles);
 
+//a 404 :)
 page('*', function(ctx){
 
       console.log('page(' + ctx.path + ')');
@@ -85,7 +93,7 @@ function displayArticles(ctx, next){
 	var template = Handlebars.compile(source); 
   
 	data = {'people': ctx.user};
-	console.log('data = >');
+	console.log('people = >');
 	console.log(data);
 	$('section#images').empty();
 	$('section#articles').append(template(data));
@@ -95,6 +103,8 @@ function displayArticles(ctx, next){
 }
 /////////////////////////////END ARTICLES
 
+
+// start page.js to view the results
 $('document').ready(function(){page()});
 
 
