@@ -2,13 +2,46 @@
 <html>
 <head>
   <title>RailsPagejsDemo</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+  <%= javascript_include_tag 'page', 'data-turbolinks-track' => true %>
+
   <%= csrf_meta_tags %>
+  <style type="text/css">ul li { display: inline; list-style:none }</style>
 </head>
 <body>
 
 <%= yield %>
 
 </body>
+<script type="text/javascript">
+page('/', function(ctx){
+      console.log('page(' + ctx.path + ')');
+          $('section#example').html('<h2 class="text-center">This is the index page: ' + ctx.path + '</h2>');
+});
+page('/images', function(ctx){
+      console.log('page(' + ctx.path + ')');
+          $('section#example').html('<h2 class="text-center">Listing of Images: ' + ctx.path + '</h2>');
+});
+page('/videos', function(ctx){
+      console.log('page(' + ctx.path + ')');
+          $('section#example').html('<h2 class="text-center">Listing of Videos: ' + ctx.path + '</h2>');
+});
+/*... /videos ..*/
+page('*', function(ctx){
+      console.log('page(' + ctx.path + ')');
+          $('section#example').html('<h2 class="text-center">Error : ' + ctx.path + '</h2>');
+});
+
+function loadUser(ctx, next){
+  var id = ctx.params.id;
+  $.getJSON('/articles' + id + '.json', function(user){
+    ctx.user = user;
+    next();
+  });
+}
+
+$('document').ready(function(){page()});
+
+</script>
 </html>
