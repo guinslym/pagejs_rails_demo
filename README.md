@@ -1,5 +1,8 @@
 # Rails Page.js Demo
 
+### Description
+This is a demo of the `gem 'pagejs_rails'`.
+Ceci est une démonstration du gem https://rubygems.org/gems/pagejs_rails
 
 Git clone it And then execute:
 
@@ -11,7 +14,7 @@ Git clone it And then execute:
 	rails s
 
 
-### Configuration (already there)
+### Configuration (already in this folder)
 ```ruby
 #app/assets/javascript/application.js
 //= require page
