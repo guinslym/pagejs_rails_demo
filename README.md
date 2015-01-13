@@ -1,25 +1,23 @@
 # Rails Page.js Demo
 
 
+Git clone it And then execute:
+
+  $ bundle
+
 ## Installation
 
 	rake db:create db:migrate db:seed
 	rails s
 
 
-### Configuration
+### Configuration (already there)
 ```ruby
 #app/assets/javascript/application.js
 //= require page
 #config/initializers/assets.rb
 Rails.application.config.assets.precompile += %w( page.js )
 ```
-And then execute:
-
-  $ bundle
-
-
-## Usage
 
 
 ## Contributing
