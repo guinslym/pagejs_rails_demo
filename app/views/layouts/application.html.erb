@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
   <title>RailsPagejsDemo</title>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
   <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
   <%= javascript_include_tag 'page', 'data-turbolinks-track' => true %>
 
   <%= csrf_meta_tags %>
@@ -18,30 +21,54 @@
 page('/', function(ctx){
       console.log('page(' + ctx.path + ')');
           $('section#example').html('<h2 class="text-center">This is the index page: ' + ctx.path + '</h2>');
+          $('section#articles').empty();
+          $('section#images').empty();
 });
 page('/images', function(ctx){
       console.log('page(' + ctx.path + ')');
           $('section#example').html('<h2 class="text-center">Listing of Images: ' + ctx.path + '</h2>');
+          $('section#articles').empty();
 });
-page('/videos', function(ctx){
-      console.log('page(' + ctx.path + ')');
-          $('section#example').html('<h2 class="text-center">Listing of Videos: ' + ctx.path + '</h2>');
-});
-/*... /videos ..*/
+page('/articles', loadArticles, displayArticles);
+
 page('*', function(ctx){
+	
       console.log('page(' + ctx.path + ')');
           $('section#example').html('<h2 class="text-center">Error : ' + ctx.path + '</h2>');
+          $('section#articles').empty();
+          $('section#images').empty();
 });
 
-function loadUser(ctx, next){
+function loadArticles(ctx, next){
   var id = ctx.params.id;
-  $.getJSON('/articles' + id + '.json', function(user){
+  $.getJSON('/articles.json', function(user){
     ctx.user = user;
     next();
+    return ctx.user
+    //console.log(user)
   });
+}
+function displayArticles(ctx, next){
+	//////////////////
+
+	var source = $("#articles-template").html(); 
+	var template = Handlebars.compile(source); 
+  
+	data = {'people': ctx.user};
+	console.log('data = >');
+	console.log(data);
+
+	$('section#images').empty();
+	$('section#articles').append(template(data));
+	 $('section#example').html('<h2 class="text-center">Listing of Articles: ' + ctx.path + '</h2>');
+
+	//////////
+
 }
 
 $('document').ready(function(){page()});
+
+
 
 </script>
 </html>
