@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/guinslym/pagejs_rails.git
-  revision: b758d046f72f29a3cd5f0b4e7be36fb7a9b83db6
+  revision: 416a61d27244a4097e485d35d438ea3b0991592c
   specs:
     pagejs_rails (0.0.3)
 
