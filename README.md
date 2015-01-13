@@ -8,13 +8,12 @@
 
 
 ### Configuration
-app/assets/javascript/application.js
-
-	//= require page
-
-config/initializers/assets.rb
-	Rails.application.config.assets.precompile += %w( page.js )
-
+```ruby
+		#app/assets/javascript/application.js
+		//= require page
+		#config/initializers/assets.rb
+    Rails.application.config.assets.precompile += %w( page.js )
+```
 And then execute:
 
   $ bundle
