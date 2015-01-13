@@ -192,19 +192,20 @@
     }
 }
 
+
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {  }
 </style>
 
-<script id="articles-template" type="text/x-handlebars-template"> 
+<script id="images-template" type="text/x-handlebars-template"> 
 {{#images}}
-   <div class="col-xs-6 col-md-2">
+   <div class="col-xs-6 col-md-2" >
       <a href="#" class="">
-         <img src="{{img}}" 
-         alt="Generic placeholder thumbnail">
+         <img src="{{img}}" class="thumbnail"
+         alt="Generic placeholder thumbnail" style="margin: 10px 0;">
       </a>
    </div>
-{{/people}}
+{{/images}}
 </script>
 
 

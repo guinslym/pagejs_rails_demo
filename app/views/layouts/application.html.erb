@@ -18,27 +18,58 @@
 
 </body>
 <script type="text/javascript">
+/*
+Each link (or routes) will be catch by pages.js 
+
+*/
 page('/', function(ctx){
       console.log('page(' + ctx.path + ')');
           $('section#example').html('<h2 class="text-center">This is the index page: ' + ctx.path + '</h2>');
           $('section#articles').empty();
           $('section#images').empty();
 });
-page('/images', function(ctx){
-      console.log('page(' + ctx.path + ')');
-          $('section#example').html('<h2 class="text-center">Listing of Images: ' + ctx.path + '</h2>');
-          $('section#articles').empty();
-});
+page('/images', loadImages, displayImages);
 page('/articles', loadArticles, displayArticles);
 
 page('*', function(ctx){
-	
+
       console.log('page(' + ctx.path + ')');
-          $('section#example').html('<h2 class="text-center">Error : ' + ctx.path + '</h2>');
+          $('section#example').html('<h2 class="text-center">This was a 404 link : ' + ctx.path + '</h2>');
           $('section#articles').empty();
           $('section#images').empty();
 });
 
+
+/////////////////////////////IMAGES
+function loadImages(ctx, next){
+  var id = ctx.params.id;
+  $.getJSON('/images.json', function(img){
+    ctx.img = img;
+    next();
+    return ctx.img
+    //console.log(ctx.img)
+  });
+}
+function displayImages(ctx, next){
+
+
+	var source = $("#images-template").html(); 
+	var template = Handlebars.compile(source); 
+  
+	data = {'images': ctx.img};
+	console.log('data Images= >');
+	console.log(data);
+
+	$('section#articles').empty();
+	$('section#images').append(template(data));
+	 $('section#example').html('<h2 class="text-center">Listing of Images: ' + ctx.path + '</h2>');
+
+}
+
+/////////////////////////////END IMAGES
+
+
+/////////////////////////////ARTICLES
 function loadArticles(ctx, next){
   var id = ctx.params.id;
   $.getJSON('/articles.json', function(user){
@@ -49,7 +80,6 @@ function loadArticles(ctx, next){
   });
 }
 function displayArticles(ctx, next){
-	//////////////////
 
 	var source = $("#articles-template").html(); 
 	var template = Handlebars.compile(source); 
@@ -57,14 +87,13 @@ function displayArticles(ctx, next){
 	data = {'people': ctx.user};
 	console.log('data = >');
 	console.log(data);
-
 	$('section#images').empty();
 	$('section#articles').append(template(data));
 	 $('section#example').html('<h2 class="text-center">Listing of Articles: ' + ctx.path + '</h2>');
 
-	//////////
 
 }
+/////////////////////////////END ARTICLES
 
 $('document').ready(function(){page()});
 
