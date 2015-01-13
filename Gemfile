@@ -25,7 +25,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
-gem 'pagejs_rails', :git => 'https://github.com/guinslym/pagejs_rails.git'
+gem 'pagejs_rails', '~> 0.0.3'
 gem 'bereshit'
 gem 'ui_faces'
 gem 'faker'
